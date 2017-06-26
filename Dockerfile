@@ -1,8 +1,9 @@
 FROM kal444/docker-hugo:latest
 MAINTAINER Kyle Huang <kyle@yellowaxe.com>
 
-ENV NODEVER=node_8.x
-ENV DISTRO="$(lsb_release -s -c)"
+ENV NODEVER node_8.x
+ENV DISTRO jessie
+# would be nice to do this: ENV DISTRO $(lsb_release -s -c)
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-https
 
