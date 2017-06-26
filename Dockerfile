@@ -4,11 +4,11 @@ MAINTAINER Kyle Huang <kyle@yellowaxe.com>
 ENV NODEVER=node_8.x
 ENV DISTRO="$(lsb_release -s -c)"
 
+RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-https
+
 RUN curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
 RUN echo "deb https://deb.nodesource.com/$NODEVER $DISTRO main" | tee /etc/apt/sources.list.d/nodesource.list
 RUN echo "deb-src https://deb.nodesource.com/$NODEVER $DISTRO main" | tee -a /etc/apt/sources.list.d/nodesource.list
-
-RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-https
 
 RUN apt-get update && apt-get install -y --no-install-recommends nodejs \
   && apt-get autoremove -y \
