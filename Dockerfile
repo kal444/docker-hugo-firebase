@@ -1,7 +1,7 @@
 FROM kal444/docker-hugo:latest
 MAINTAINER Kyle Huang <kyle@yellowaxe.com>
 
-ENV NODEVER node_8.x
+ENV NODEVER node_7.x
 ENV DISTRO jessie
 # would be nice to do this: ENV DISTRO $(lsb_release -s -c)
 
