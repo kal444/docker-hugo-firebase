@@ -17,8 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends nodejs \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && npm install -g firebase-tools
 
-RUN mkdir /site /public
-
 WORKDIR /site
 
 VOLUME /site
