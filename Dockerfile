@@ -1,24 +1,25 @@
-FROM kal444/docker-hugo:latest
+FROM node:8
 MAINTAINER Kyle Huang <kyle@yellowaxe.com>
 
-ENV NODEVER node_7.x
-ENV DISTRO jessie
-# would be nice to do this: ENV DISTRO $(lsb_release -s -c)
+ENV HUGO_VERSION=0.29
+ENV HUGO_DOWNLOAD=https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-https
-
-RUN curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-RUN echo "deb https://deb.nodesource.com/$NODEVER $DISTRO main" | tee /etc/apt/sources.list.d/nodesource.list
-RUN echo "deb-src https://deb.nodesource.com/$NODEVER $DISTRO main" | tee -a /etc/apt/sources.list.d/nodesource.list
-
-RUN apt-get update && apt-get install -y --no-install-recommends nodejs \
+RUN wget ${HUGO_DOWNLOAD} -O /tmp/hugo.deb \
+  && dpkg -i /tmp/hugo.deb \
+  && rm /tmp/hugo.deb \
+  && npm install -g firebase-tools \
   && apt-get autoremove -y \
   && apt-get clean -y \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-  && npm install -g firebase-tools
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN mkdir /site /public
 
 WORKDIR /site
 
 VOLUME /site
 VOLUME /public
+
+EXPOSE 1313
+
+ENTRYPOINT [ "hugo", "-d", "/public" ]
 
