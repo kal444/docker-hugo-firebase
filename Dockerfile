@@ -7,7 +7,7 @@ ENV HUGO_DOWNLOAD=https://github.com/gohugoio/hugo/releases/download/v${HUGO_VER
 RUN wget ${HUGO_DOWNLOAD} -O /tmp/hugo.deb \
   && dpkg -i /tmp/hugo.deb \
   && rm /tmp/hugo.deb \
-  && npm install -g firebase-tools \
+  && yarn global add firebase-tools \
   && apt-get autoremove -y \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
