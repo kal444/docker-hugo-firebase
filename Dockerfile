@@ -1,7 +1,7 @@
 FROM node:8
 MAINTAINER Kyle Huang <kyle@yellowaxe.com>
 
-ENV HUGO_VERSION=0.30.2
+ENV HUGO_VERSION=0.53
 ENV HUGO_DOWNLOAD=https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
 
 RUN wget ${HUGO_DOWNLOAD} -O /tmp/hugo.deb \
